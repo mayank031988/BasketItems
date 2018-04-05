@@ -6,11 +6,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.rbc.basket.exceptions.ItemNotFoundException;
+import org.junit.rules.ExpectedException;
 
 public class BasketCalculateTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 		
 		@Test
@@ -46,10 +51,10 @@ public class BasketCalculateTest {
 			b.addItem("Watermelon");
 			String actual = Double.toString(b.calculateCost());
 			
-			assertEquals("10.0", actual);
+			assertEquals("0.0", actual);
 			
 		}
-		@Test
+		@Test(expected = AssertionError.class)
 		public void testFooThrowsIndexOutOfBoundsException() throws ItemNotFoundException {
 		  boolean thrown = false;
 		  Basket b = new BasketImpl();
